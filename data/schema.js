@@ -8,12 +8,6 @@
  */
 
 import {
-  GraphQLBoolean,
-  GraphQLFloat,
-  GraphQLID,
-  GraphQLInt,
-  GraphQLList,
-  GraphQLNonNull,
   GraphQLObjectType,
   GraphQLSchema,
   GraphQLString,
@@ -25,7 +19,6 @@ import {
   connectionFromArray,
   fromGlobalId,
   globalIdField,
-  mutationWithClientMutationId,
   nodeDefinitions,
 } from 'graphql-relay';
 
@@ -80,10 +73,10 @@ var userType = new GraphQLObjectType({
       type: widgetConnection,
       description: 'A person\'s collection of widgets',
       args: connectionArgs,
-      resolve: (_, args) => connectionFromArray(getWidgets(), args),
-    },
+      resolve: (_, args) => connectionFromArray(getWidgets(), args)
+    }
   }),
-  interfaces: [nodeInterface],
+  interfaces: [nodeInterface]
 });
 
 var widgetType = new GraphQLObjectType({
@@ -93,14 +86,14 @@ var widgetType = new GraphQLObjectType({
     id: globalIdField('Widget'),
     name: {
       type: GraphQLString,
-      description: 'The name of the widget',
+      description: 'The name of the widget'
     },
     image: {
       type: GraphQLString,
       description: 'An image of a cat'
     }
   }),
-  interfaces: [nodeInterface],
+  interfaces: [nodeInterface]
 });
 
 /**
@@ -120,19 +113,8 @@ var queryType = new GraphQLObjectType({
     // Add your own root fields here
     viewer: {
       type: userType,
-      resolve: () => getViewer(),
-    },
-  }),
-});
-
-/**
- * This is the type that will be the root of our mutations,
- * and the entry point into performing writes in our schema.
- */
-var mutationType = new GraphQLObjectType({
-  name: 'Mutation',
-  fields: () => ({
-    // Add your own mutations here
+      resolve: () => getViewer()
+    }
   })
 });
 
@@ -141,7 +123,5 @@ var mutationType = new GraphQLObjectType({
  * type we defined above) and export it.
  */
 export var Schema = new GraphQLSchema({
-  query: queryType,
-  // Uncomment the following after adding some mutation fields:
-  // mutation: mutationType
+  query: queryType
 });
