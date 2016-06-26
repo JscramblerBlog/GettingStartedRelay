@@ -95,6 +95,10 @@ var widgetType = new GraphQLObjectType({
       type: GraphQLString,
       description: 'The name of the widget',
     },
+    image: {
+      type: GraphQLString,
+      description: 'An image of a cat'
+    }
   }),
   interfaces: [nodeInterface],
 });
