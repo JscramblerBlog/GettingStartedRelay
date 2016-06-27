@@ -5,10 +5,13 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <h1>Widget list</h1>
+        <h1>Ferocious Cats</h1>
         <ul>
           {this.props.viewer.widgets.edges.map(edge =>
-            <li key={edge.node.id}>{edge.node.name} (ID: {edge.node.id})</li>
+            <li key={edge.node.id}>
+              <h3>{edge.node.name}</h3>
+              <img src={edge.node.image} alt={edge.node.name} width="200px" />
+            </li>
           )}
         </ul>
       </div>
@@ -25,10 +28,11 @@ export default Relay.createContainer(App, {
             node {
               id,
               name,
-            },
-          },
-        },
+              image
+            }
+          }
+        }
       }
-    `,
-  },
+    `
+  }
 });
